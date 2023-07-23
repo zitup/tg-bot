@@ -1,11 +1,13 @@
 import { Bot, InlineKeyboard } from "grammy";
+import state from "./state";
 
 let isBuy = true;
 
 export const setupCallbacks = (bot: Bot) => {
   bot.callbackQuery('add', async ctx => {
     await ctx.answerCallbackQuery();
-    await ctx.reply('You clicked Add!');
+    state.replyStage = 1;
+    await ctx.reply('Please reply with a wallet name (up to 8 characters).');
   
   
   bot.callbackQuery('switch', async ctx => {
