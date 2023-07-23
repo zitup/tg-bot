@@ -2,14 +2,7 @@ import { Bot, InlineKeyboard } from "grammy";
 
 let isBuy = true;
 
-export const generateKeyboard = (bot: Bot) => {
-  const defaultKeyboard = new InlineKeyboard()
-    .text('Add', 'add')
-    .text('Buy ↔️ Sell', 'switch')
-    .row()
-    .text('Buy 0.01', 'action_0_01')
-    .text('Buy 0.05', 'action_0_05');
-
+export const setupCallbacks = (bot: Bot) => {
   bot.callbackQuery('add', async ctx => {
     await ctx.answerCallbackQuery();
     await ctx.reply('You clicked Add!');
@@ -42,6 +35,4 @@ export const generateKeyboard = (bot: Bot) => {
       await ctx.answerCallbackQuery();
       await ctx.reply(`You clicked ${isBuy ? 'Buy' : 'Sell'} 0.05!`);
   
-
-  return defaultKeyboard;
 }
