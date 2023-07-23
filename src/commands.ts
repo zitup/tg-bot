@@ -31,7 +31,7 @@ export const setupCommands = (bot: Bot<MyContext>) => {
             const keyboard = getKeyboard(ctx);
             const newMessage = getMessages(ctx);
 
-            await ctx.reply(`Successfully added!\n\n\n${newMessage}`, { reply_markup: keyboard 
+            await ctx.reply(`Successfully added!\n\n${newMessage}`, { reply_markup: keyboard 
         } else {
             await ctx.reply('Invalid input. Please reply with your wallet address again.');
         }

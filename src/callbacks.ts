@@ -32,4 +32,9 @@ export const setupCallbacks = (bot: Bot<MyContext>) => {
       await ctx.answerCallbackQuery();
       await ctx.reply(`You clicked ${ctx.session.isBuy ? 'Buy' : 'Sell'} 0.05!`);
   
+
+  // 响应未知回调查询
+  bot.on("callback_query:data", async (ctx) => {
+    await ctx.answerCallbackQuery();
+  
 }
