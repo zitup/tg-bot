@@ -1,12 +1,10 @@
 import { Bot, InlineKeyboard } from "grammy";
-import state from "./state";
+import { MyContext } from "./session";
 
-let isBuy = true;
-
-export const setupCallbacks = (bot: Bot) => {
+export const setupCallbacks = (bot: Bot<MyContext>) => {
   bot.callbackQuery('add', async ctx => {
     await ctx.answerCallbackQuery();
-    state.replyStage = 1;
+    ctx.session.replyStage = 1;
     await ctx.reply('Please reply with a wallet name (up to 8 characters).');
   
   
@@ -14,7 +12,8 @@ export const setupCallbacks = (bot: Bot) => {
     await ctx.answerCallbackQuery();
 
     // 更新状态变量
-    isBuy = !isBuy;
+    const { isBuy } = ctx.session;
+    ctx.session.isBuy = !isBuy;
 
     // 更新inline键盘
     const newKeyboard = new InlineKeyboard()
@@ -30,11 +29,11 @@ export const setupCallbacks = (bot: Bot) => {
 
   bot.callbackQuery('action_0_01', async ctx => {
       await ctx.answerCallbackQuery();
-      await ctx.reply(`You clicked ${isBuy ? 'Buy' : 'Sell'} 0.01!`);
+      await ctx.reply(`You clicked ${ctx.session.isBuy ? 'Buy' : 'Sell'} 0.01!`);
   
 
   bot.callbackQuery('action_0_05', async ctx => {
       await ctx.answerCallbackQuery();
-      await ctx.reply(`You clicked ${isBuy ? 'Buy' : 'Sell'} 0.05!`);
+      await ctx.reply(`You clicked ${ctx.session.isBuy ? 'Buy' : 'Sell'} 0.05!`);
   
 }

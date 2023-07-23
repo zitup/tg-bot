@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@grammyjs/storage-file": "^2.3.0",
+    "@grammyjs/storage-free": "^2.3.0",
     "grammy": "^1.17.2"
   },
   "devDependencies": {
