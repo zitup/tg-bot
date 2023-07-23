@@ -9,8 +9,8 @@ export const setupCommands = (bot: Bot<MyContext>) => {
 
     ctx.reply(defaultMessage, {
         reply_markup: keyboard
-    
-  
+    });
+  });
 
   bot.on('message', async (ctx) => {
     const text = ctx.message.text;
@@ -31,10 +31,10 @@ export const setupCommands = (bot: Bot<MyContext>) => {
             const keyboard = getKeyboard(ctx);
             const newMessage = getMessages(ctx);
 
-            await ctx.reply(`Successfully added!\n\n${newMessage}`, { reply_markup: keyboard 
+            await ctx.reply(`Successfully added!\n\n${newMessage}`, { reply_markup: keyboard });
         } else {
             await ctx.reply('Invalid input. Please reply with your wallet address again.');
         }
     }
-  
+  });
 }
