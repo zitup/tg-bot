@@ -1,5 +1,6 @@
-import { Bot, InlineKeyboard } from "grammy";
+import { Bot } from "grammy";
 import { MyContext } from "./session";
+import { getKeyboard } from "./utils";
 
 export const setupCallbacks = (bot: Bot<MyContext>) => {
   bot.callbackQuery('add', async ctx => {
@@ -16,12 +17,7 @@ export const setupCallbacks = (bot: Bot<MyContext>) => {
     ctx.session.isBuy = !isBuy;
 
     // 更新inline键盘
-    const newKeyboard = new InlineKeyboard()
-        .text('Add', 'add')
-        .text('Buy ↔️ Sell', 'switch')
-        .row()
-        .text(isBuy ? 'Buy 0.01' : 'Sell 0.01', 'action_0_01')
-        .text(isBuy ? 'Buy 0.05' : 'Sell 0.05', 'action_0_05');
+    const newKeyboard = getKeyboard(ctx);
     await ctx.editMessageReplyMarkup({
         reply_markup: newKeyboard
     
