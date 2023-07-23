@@ -1,5 +1,5 @@
 import { Bot, Context, SessionFlavor, session } from "grammy";
-import { FileAdapter } from "@grammyjs/storage-file";
+import { freeStorage } from "@grammyjs/storage-free";
 
 export interface SessionData {
   isBuy: boolean;
@@ -29,8 +29,6 @@ export const setupSession = (bot: Bot<MyContext>) => {
   bot.use(session({
     initial,
     getSessionKey,
-    storage: new FileAdapter({
-      dirName: "db",
-    }),
+    storage: freeStorage<SessionData>(bot.token),
   }));
 }

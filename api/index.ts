@@ -13,11 +13,10 @@ setupCommands(bot);
 setupCallbacks(bot);
 
 const app = express();
-app.use(express.json());
 app.use(routes);
-app.use(webhookCallback(bot, "express"));
+app.use(webhookCallback(bot, "https"));
 app.use((err: Error, _req: Request, res: Response) => {
-  console.error(err.stack);
+  console.error(err.message);
   res.status(500).send('Something broke!');
 });
 

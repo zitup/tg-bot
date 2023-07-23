@@ -3,6 +3,5 @@ dist/
 build/
 **/.DS_Store
 *.log
-db
 .env
 .vercel
